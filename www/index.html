@@ -56,7 +56,7 @@
 <body>
     <input type="text" id="status" hidden value="login">
     <input type="text" id="u_reg_id" hidden>
-
+    <input type="text" id="role" hidden>
     <div id="navigation">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
           <a class="navbar-brand" href="#">BFP Incident Report App</a>
@@ -65,23 +65,8 @@
           </button>
 
           <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" id="home">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="getreports">Your Reports</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="" tabindex="-1" aria-disabled="true" >Instructions</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                  <a class="dropdown-item" href="#">View Profile</a>
-                  <a id="logout" class="dropdown-item" href="#">Logout</a>
-                </div>
-              </li>
+            <ul class="navbar-nav mr-auto" id="navs">
+
             </ul>
             <form class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
@@ -93,14 +78,16 @@
     <div id="container" role="main" class="container">
         <!-- <button class="btn btn-primary" id="try">TRY ME</button> -->
     </div>
-    <div class="d-flex justify-content-center">
-        <div id="loading">
-            <center>
-                <div class="spinner-border text-success" role="status" id="loading">
-                  <span class="sr-only">Loading...</span>
-                </div>
-                <h3>Loading</h3>
-            </center>
+    <div class="jumbotron" style="margin-top: 40%; margin-left: 5%; margin-right: 5%;" id="loading">
+        <div class="d-flex justify-content-center">
+            <div id="loading">
+                <center>
+                    <div class="spinner-border text-success" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                    <h3>Loading</h3>
+                </center>
+            </div>
         </div>
     </div>
     <script type="text/javascript" src="cordova.js"></script>
@@ -128,46 +115,7 @@
                 });
             }
         });
-        $("#logout").click(function(){
-            $("#loading").show();
-            $.ajax({
-                url: "http://wordpresssample11.000webhostapp.com/mobile-server/get/login.php",
-                method: "GET",  
-                success: function(data){
-                    // console.log(data);
-                    document.getElementById("navigation").style.display = "none";
-                    $("#loading").hide();
-                    $("#container").html(data);
-                }
-            });
-        });
-        $("#getreports").click(function(){
-            console.log($("#user_id").val());
-            $("#loading").show();
-            $.ajax({
-                url: "http://wordpresssample11.000webhostapp.com/mobile-server/get/reports.php",
-                method: "POST",
-                data:{'user_id' : $("#u_reg_id").val()},
-                success: function(data){
-                    // console.log(data);
-                    $("#loading").hide();
-                    $("#container").html(data);
-                }
-            });
-        });
-        $("#home").click(function(){
-            $("#loading").show();
-            $.ajax({
-                url: "http://wordpresssample11.000webhostapp.com/mobile-server/get/citizen.php",
-                method: "GET",
-                success: function(data){
-                    // console.log(data);
-                    console.log($("#u_reg_id").val());
-                    $("#loading").hide();
-                    $("#container").html(data);
-                }
-            });
-        });
+
     </script>
 </body>
 
